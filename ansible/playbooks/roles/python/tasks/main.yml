@@ -1,0 +1,38 @@
+- name: Install dependencies for Python build
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - make
+    - build-essential
+    - libssl-dev
+    - zlib1g-dev
+    - libbz2-dev
+    - libreadline-dev
+    - libsqlite3-dev
+    - wget
+    - curl
+    - llvm
+    - libncurses5-dev
+    - libncursesw5-dev
+    - xz-utils
+    - tk-dev
+    - libffi-dev
+    - liblzma-dev
+    - python-openssl
+    - git
+
+- name: Install pyenv
+  git:
+    repo: 'https://github.com/pyenv/pyenv.git'
+    dest: "{{ ansible_env.HOME }}/.pyenv"
+    version: master
+  become_user: "{{ ansible_user }}"
+
+- name: Install Python version using pyenv
+  shell: "{{ ansible_env.HOME }}/.pyenv/bin/pyenv install -s {{ python_version }}"
+  environment:
+    PYENV_ROOT: "{{ ansible_env.HOME }}/.pyenv"
+  become_user: "{{ ansible_user }}"
+  vars:
+    python_version: "3.8.5" # This should be dynamically set

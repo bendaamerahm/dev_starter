@@ -1,0 +1,9 @@
+- hosts: frontend
+  become: yes
+  vars_files:
+    - ../vars/versions.yml
+    - ../vars/secrets.yml
+  roles:
+    - common
+    - nodejs
+    - dockerfile_generation

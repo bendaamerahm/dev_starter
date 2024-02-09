@@ -1,0 +1,19 @@
+# config.yml
+versions:
+  ubuntu: "20.04"
+  java: "11"
+  node: "14"
+  python: "3.8"
+  php: "7.4"
+  angular_cli: "latest"
+  create_react_app: "latest"
+  maven: "3.6.3"
+  gradle: "6.8"
+
+INSTALL_DIR: "/opt"
+INSTALL_INTELLIJ: false
+INSTALL_VSCODE: false
+INSTALL_ANYPOINT: false
+IDEA_URL: "https://download.jetbrains.com/idea/ideaIC-2021.2.3.tar.gz"
+VSCODE_URL: "https://go.microsoft.com/fwlink/?LinkID=760868"
+ANYPOINT_URL: "https://mule-studio.s3.amazonaws.com/7.8.0-20210423/AnypointStudio-7.8.0-20210423-linux64.tar.gz"

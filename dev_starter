@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Ensure executable permissions for scripts
+chmod +x scripts/*.sh
+
+# Check if init-dev.sh script exists and is executable
+if [ ! -x "scripts/init-dev.sh" ]; then
+    echo "Error: init-dev.sh script is either missing or not executable."
+    exit 1
+fi
+
+# Execute the init-dev.sh script with passed arguments
+./scripts/init-dev.sh "$@"

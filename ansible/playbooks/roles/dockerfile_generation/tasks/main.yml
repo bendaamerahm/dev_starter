@@ -1,0 +1,6 @@
+- name: Generate Dockerfile for role
+  template:
+    src: "../templates/Dockerfile.{{ role_name }}.j2"
+    dest: "../../../docker/{{ role_name }}/Dockerfile.{{ role_name }}"
+  vars:
+    role_name: "{{ inventory_hostname.split('1')[0] }}"  # Simple logic to determine role based on hostname

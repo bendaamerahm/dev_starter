@@ -1,0 +1,19 @@
+- name: Add repository for PHP
+  apt_repository:
+    repo: ppa:ondrej/php
+    state: present
+
+- name: Install PHP and extensions
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "php{{ php_version }}"
+    - "php{{ php_version }}-cli"
+    - "php{{ php_version }}-fpm"
+    - "php{{ php_version }}-mysql"
+    - "php{{ php_version }}-xml"
+    - "php{{ php_version }}-mbstring"
+    - "php{{ php_version }}-curl"
+  vars:
+    php_version: 7.4 # This should be defined in a vars file or passed as a variable

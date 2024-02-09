@@ -1,0 +1,5 @@
+nodejs_version: "14.17.0"
+react_version: "17.0.1"
+angular_cli_version: "10.1.7"
+vue_cli_version: "@vue/cli 4.5.8"
+build_environment: "production"

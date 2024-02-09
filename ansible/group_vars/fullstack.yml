@@ -1,0 +1,6 @@
+nodejs_version: "14.17.0"
+java_version: "11"
+database_url: "jdbc:postgresql://db.example.com:5432/fullstackdb"
+database_user: "fullstackuser"
+database_password: "{{ vault_database_password_fullstack }}"
+app_port: 8080

@@ -1,0 +1,10 @@
+versions:
+  ubuntu_version: "20.04"
+  java_version: "11"
+  node_version: "14"
+  python_version: "3.8"
+  php_version: "7.4"
+  angular_cli_version: "latest"
+  create_react_app_version: "latest"
+  maven_version: "3.6.3"
+  gradle_version: "6.8"

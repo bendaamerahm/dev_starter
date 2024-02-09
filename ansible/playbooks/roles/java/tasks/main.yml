@@ -1,0 +1,6 @@
+- name: Install OpenJDK
+  apt:
+    name: "openjdk-{{ java_version }}-jdk"
+    state: present
+  vars:
+    java_version: 11 # This can be overridden

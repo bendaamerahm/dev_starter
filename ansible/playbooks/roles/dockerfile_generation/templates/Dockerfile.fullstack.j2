@@ -1,0 +1,40 @@
+# Use Ubuntu as the base image for wide compatibility
+FROM ubuntu:20.04
+
+# Avoid prompts from apt
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Install common dependencies, JDK for Java, and Python
+RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    git \
+    openjdk-{{ java_version }}-jdk \
+    python{{ python_version }} \
+    python{{ python_version }}-pip \
+    php{{ php_version }} \
+    nodejs \
+    npm \
+    docker.io \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set JAVA_HOME environment variable
+ENV JAVA_HOME /usr/lib/jvm/java-{{ java_version }}-openjdk-amd64
+
+# Upgrade pip and install any global Python packages
+RUN pip install --upgrade pip
+
+# Install Node.js global packages
+RUN npm install -g @angular/cli@{{ angular_cli_version }} create-react-app
+
+# Set the working directory
+WORKDIR /app
+
+# Copy your project files into the Docker image
+COPY . .
+
+# Expose ports for web servers, adjust these as necessary
+EXPOSE 3000 8080
+
+# Command to run services, adjust according to your project's needs
+CMD ["bash"]

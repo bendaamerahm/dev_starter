@@ -1,0 +1,13 @@
+- hosts: fullstack
+  become: yes
+  vars_files:
+    - ../vars/versions.yml
+    - ../vars/secrets.yml
+  roles:
+    - common
+    - java
+    - nodejs
+    - docker
+    - python 
+    - php
+    - dockerfile_generation

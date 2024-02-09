@@ -1,0 +1,27 @@
+- name: Install Docker prerequisites
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg-agent
+    - software-properties-common
+
+- name: Add Docker’s official GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Set up the stable repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable"
+    state: present
+
+- name: Install Docker Engine
+  apt:
+    name: docker-ce={{ docker_version }} docker-ce-cli={{ docker_version }} containerd.io
+    state: present
+  vars:
+    docker_version: "{{ docker_ce_version }}"

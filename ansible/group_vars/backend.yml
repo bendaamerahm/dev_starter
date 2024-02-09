@@ -1,0 +1,7 @@
+java_version: "11"
+maven_version: "3.6.3"
+spring_boot_version: "2.3.4.RELEASE"
+database_url: "jdbc:postgresql://db.example.com:5432/mydatabase"
+database_user: "dbuser"
+database_password: "{{ vault_database_password_backend }}"
+app_port: 8080

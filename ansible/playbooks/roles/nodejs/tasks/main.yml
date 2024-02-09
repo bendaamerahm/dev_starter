@@ -1,0 +1,23 @@
+- name: Install Node.js
+  apt:
+    name: nodejs
+    state: present
+  become: true
+
+- name: Install NPM
+  apt:
+    name: npm
+    state: present
+  become: true
+
+- name: Install specific Node.js version using NVM
+  shell: |
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    nvm install {{ nodejs_version }}
+  args:
+    executable: /bin/bash
+  become_user: "{{ ansible_user }}"
+  vars:
+    nodejs_version: "14.17.0" # This should be moved to a variable file for easy update

@@ -1,0 +1,44 @@
+# Base image for the operating system
+FROM ubuntu:{{ ubuntu_version }}
+
+# Install base dependencies and tools
+RUN apt-get update && apt-get install -y curl git wget software-properties-common
+
+# Java build environment
+## Install OpenJDK, Maven, and Gradle
+RUN apt-get update && apt-get install -y openjdk-{{ java_version }}-jdk maven gradle && rm -rf /var/lib/apt/lists/*
+
+# Python build environment
+## Upgrade pip and install Python build tools
+RUN apt-get update && apt-get install -y python{{ python_version }} python{{ python_version }}-pip && \
+    pip install --upgrade pip setuptools wheel
+
+# Node.js and NPM
+## Install Node.js and NPM
+RUN curl -sL https://deb.nodesource.com/setup_{{ nodejs_version }}.x | bash - && \
+    apt-get install -y nodejs
+
+# PHP runtime
+## Install PHP
+RUN apt-get update && apt-get install -y php{{ php_version }}
+
+# Docker CLI and Kubernetes CLI (kubectl)
+## Install Docker and kubectl
+RUN apt-get update && apt-get install -y docker.io && \
+    curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" && \
+    chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set environment variables for Java
+ENV JAVA_HOME=/usr/lib/jvm/java-{{ java_version }}-openjdk-amd64
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
+# Non-root user for enhanced security
+RUN groupadd -r developer && useradd --create-home --shell /bin/bash -r -g developer developer
+USER developer
+
+# Set the working directory
+WORKDIR /home/developer
+
+# Default command
+CMD ["/bin/bash"]
