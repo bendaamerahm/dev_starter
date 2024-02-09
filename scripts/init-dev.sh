@@ -22,7 +22,7 @@ show_help() {
 
 show_usage() {
     echo "Run this script to initialize your development environment based on your role:"
-    echo "./init-dev.sh"
+    echo "./dev_starter"
 }
 
 detect_os() {
